@@ -1,0 +1,70 @@
+{
+  "name": "@roundhouseai/ioi-mcp",
+  "version": "0.1.0",
+  "description": "Local stdio MCP server for ioi.md. Proxies the hosted tools and signs x402 payments from the rh-x402 wallet.",
+  "mcpName": "io.github.roundhouseai-io/ioi-mcp",
+  "keywords": [
+    "mcp",
+    "ioi",
+    "x402",
+    "usdc",
+    "base",
+    "llm"
+  ],
+  "license": "MIT",
+  "author": "Roundhouse AI Ltd",
+  "homepage": "https://www.ioi.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roundhouseai-io/ioi-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/roundhouseai-io/ioi-mcp/issues"
+  },
+  "type": "module",
+  "bin": {
+    "ioi-mcp": "./dist/cli.js"
+  },
+  "main": "./dist/cli.js",
+  "types": "./dist/cli.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "llms-install.md",
+    "server.json"
+  ],
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "oxlint src test",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@roundhouseai/x402": "0.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "oxlint": "^1.28.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "viem": "^2.21.0",
+    "vitest": "^2.1.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

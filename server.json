@@ -1,0 +1,77 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.roundhouseai-io/ioi-mcp",
+  "title": "ioi",
+  "description": "Pay-per-call open-model inference. USDC on Base over x402, or an API key.",
+  "version": "0.1.0",
+  "websiteUrl": "https://www.ioi.md",
+  "repository": {
+    "url": "https://github.com/roundhouseai-io/ioi-mcp",
+    "source": "github",
+    "id": "1455414844"
+  },
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/roundhouseai-io/ioi-mcp/main/icon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": ["any"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.ioi.md/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional API key as a Bearer token: Bearer sk-canary-…. Omit it to pay per call with x402 (the host must sign _meta[\"x402/payment\"]; otherwise use the npm package).",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@roundhouseai/ioi-mcp",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "IOI_API_KEY",
+          "description": "Optional sk-canary-… key. When set, calls use Authorization: Bearer and do not sign x402 payments.",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "IOI_MAX_PER_CALL",
+          "description": "Most USDC one call may sign, as a decimal. Default 0.05, or the user's rh-x402 limits.maxPerCall when they set one.",
+          "format": "number",
+          "isRequired": false
+        },
+        {
+          "name": "IOI_DAILY_CAP",
+          "description": "Most USDC signed per UTC day. Default 5, or the user's rh-x402 limits.dailyCap when they set one.",
+          "format": "number",
+          "isRequired": false
+        },
+        {
+          "name": "IOI_MAX_DEPOSIT",
+          "description": "Most USDC a batch-settlement channel may deposit. Default 1. A larger quote is refused and nothing is signed.",
+          "format": "number",
+          "isRequired": false
+        },
+        {
+          "name": "IOI_SCHEME",
+          "description": "Force exact, upto, or batch-settlement. Unset prefers upto, then exact. batch-settlement is also used when an open ~/.x402 channel already covers the quote.",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}
