@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+*.tsbuildinfo
+.x402rc
+.env
+.env.*
+!.env.example
